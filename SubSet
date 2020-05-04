@@ -1,0 +1,98 @@
+using System;					
+public class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine("Hello World");
+		int[] C = new int[8]{1,2,3,4,5,6,7,8};
+		int ch=0;
+		int g = C.GetLength(0);
+		int g1 = C.GetLength(0);
+		for(int i=1;i<C.GetLength(0);i++)
+		{
+			g= g*(g1-i);
+		}
+		int[,] A = new int[C.GetLength(0)-1,g];
+		int[,] D = new int[C.GetLength(0)-1,g];
+		for(int j=0;j<C.GetLength(0);j++)
+		{
+			int m =0;
+			for(int k =0;k<C.GetLength(0);k++)
+			{				
+				if(k!=j)
+				{
+					A[m,j] = C[k];
+					Console.Write(C[k].ToString());
+					m=m+1;
+				}
+			}
+			Console.WriteLine(".");
+		}
+		/////////////////////////////////////////////////////
+		int[] B = new int[A.GetLength(0)];
+		int h = C.GetLength(0);
+		int h1 = C.GetLength(0);
+		int co=1;
+ 		///////////////////////////////////////////////////////
+		while(h<g)
+		{		
+			for(int i=0;i<h;i++)
+			{			
+				int n=0;
+				for(int j=0;j<A.GetLength(0)-co+1;j++)
+				{
+					B[j] = A[j,i];
+					n=n+1;
+				}
+				for(int j=0;j<n;j++)
+				{
+					int m=0;
+					for(int k =0;k<n;k++)
+					{
+						if(k!=j)
+						{
+							if(i==0){Console.Write(B[k].ToString());}
+							D[m,j+(C.GetLength(0)-co)*i] = B[k];
+							m = m+1;
+						}						
+					}
+					if(i==0)Console.WriteLine(".");
+					int ch1=0;
+					if(i>0)
+					{
+						for(int l =0;l<j+(C.GetLength(0)-co)*i;l++)
+						{
+							ch = 0;
+							for(int l1=0;l1<m;l1++)
+							{
+								for(int l2 = 0;l2<m;l2++)
+								{
+									if(D[l1,j+(C.GetLength(0)-co)*i]==D[l2,l]){ch=ch+1;}
+								}								
+							}
+							ch1=ch;
+							if(ch == m){break;}							
+						}
+						if(ch1<m)
+						{
+							for(int k =0;k<m;k++)
+							{
+								Console.Write(D[k,j+(C.GetLength(0)-co)*i].ToString());
+							}
+							Console.WriteLine(".");
+						}							
+					}
+				}
+			}
+			h = h*(h1-co);	
+			for(int j=0;j<h;j++)
+			{
+				for(int k =0;k<C.GetLength(0)-co;k++)
+				{
+					A[k,j] = D[k,j];
+				}				
+			}
+			co = co+1;			
+		}
+	}
+}
